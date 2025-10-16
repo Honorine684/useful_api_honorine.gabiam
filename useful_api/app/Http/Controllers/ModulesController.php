@@ -13,7 +13,7 @@ class ModulesController extends Controller
     {
         $modules = modules::select('id','name','description')->get();
         return response()->json([
-            'modules' => $modules
+            $modules
         ]);
     }
 

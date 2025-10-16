@@ -14,13 +14,16 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        /*$request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
+           'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:8',
-        ]);*/
+        ]);
 
-
+        $user = User::where('email', $request->email)->first();
+        if (isset($user)) {
+            return response()->json(['message' => 'email already exist'], 200);
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -45,7 +48,8 @@ class UserController extends Controller
             $user = Auth::user();
             //$request->session()->regenerate();
             $token = $user->createToken(
-                'usertoken',)->plainTextToken;
+                'usertoken',
+            )->plainTextToken;
             return response()->json([
                 'token' => $token,
                 'user_id' => $user->id
