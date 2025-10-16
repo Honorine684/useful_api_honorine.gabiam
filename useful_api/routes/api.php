@@ -23,6 +23,11 @@ Route::get('/modules', [ModulesController::class, 'getModules']);
 
 Route::controller(ModulesController::class)->group(function () {
     Route::get('/modules', 'getModules');
-    Route::post('/modules/{id}/activate', 'moduleActivate');
-    Route::post('/modules/{id}/deactivate', 'moduleDeactivate');
+
+
 });
+Route::middleware('auth:sanctum')->group(function (): void {
+    Route::post('/modules/{id}/activate',[ModulesController::class,'moduleActivate']);
+    Route::post('/modules/{id}/deactivate',[ModulesController::class,'moduleDeactivate']);
+});
+
