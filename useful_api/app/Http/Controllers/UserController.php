@@ -20,10 +20,10 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+       /* $user = User::where('email', $request->email)->first();
         if (isset($user)) {
             return response()->json(['message' => 'email already exist'], 200);
-        }
+        }*/
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

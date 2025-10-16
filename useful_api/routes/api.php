@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ShortenController;
 use App\Http\Controllers\ModulesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,10 @@ Route::controller(ModulesController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/modules/{id}/activate',[ModulesController::class,'moduleActivate']);
     Route::post('/modules/{id}/deactivate',[ModulesController::class,'moduleDeactivate']);
+});
+
+Route::middleware('auth:sanctum','CheckModuleActive')->group(function (): void {
+    Route::post('/shorten',[ShortenController::class,'shorten']);
+    //Route::post('/modules/{id}/deactivate',[ModulesController::class,'moduleDeactivate']);
 });
 
