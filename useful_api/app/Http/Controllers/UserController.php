@@ -14,11 +14,11 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        /*$request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
            'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:8',
-        ]);*/
+        ]);
 
        /* $user = User::where('email', $request->email)->first();
         if (isset($user)) {
